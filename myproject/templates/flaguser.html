@@ -1,0 +1,39 @@
+{% extends "basic.html" %}
+{% block content %}
+
+
+  <!-- OTHER STUFF ON THE PAGE -->
+
+  <div class="container">
+ 
+		<div class="p-3 mb-2 bg-secondary text-white"><h2>Enable/Disable The User</h2></div>
+		<div class="jumbotron">
+		{% if err_msg %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			{{err_msg}}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>
+		{% endif %}
+
+	  <form method="POST" class="needs-validation" novalidate>
+		{{form.hidden_tag()}}
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+				{{form.user_id.label}}{{form.user_id(class_="form-control")}}
+			</div>
+		  </div>
+		  <div class="form-row">
+			  <div class="col-md-5 mb-3">
+				{{form.action.label}}{{form.action(class_="form-control")}}
+			  </div>
+			</div>
+			{{form.submit(class_="btn btn-primary")}}
+	  </form>
+</div>
+
+  <div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>  
+
+
+{% endblock %}

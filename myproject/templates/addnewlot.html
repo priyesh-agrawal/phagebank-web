@@ -1,0 +1,167 @@
+{% extends "basic.html" %}
+{% block content %}
+
+
+  <!-- OTHER STUFF ON THE PAGE -->
+
+  <div class="container">
+ 
+		<div class="p-3 mb-2 bg-secondary text-white"><h2>Add New Lot to PhageBank DB</h2></div>
+		<div class="jumbotron">
+		{% if err_msg %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			{{err_msg}}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>
+		{% endif %}
+		{% if form.lot_number.errors %}
+		{% for fname_err in form.lot_number.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{fname_err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.potency.errors %}
+		{% for err in form.potency.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.HCP.errors %}
+		{% for err in form.HCP.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.chloro.errors %}
+		{% for err in form.chloro.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.triton.errors %}
+		{% for err in form.triton.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.endo.errors %}
+		{% for err in form.endo.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.analysis_date.errors %}
+		{% for err in form.analysis_date.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.report_date.errors %}
+		{% for err in form.report_date.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.pH.errors %}
+		{% for err in form.pH.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.name.errors %}
+		{% for err in form.name.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.created_by.errors %}
+		{% for err in form.created_by.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+
+	  <form method="POST" class="needs-validation" novalidate>
+		  {{form.hidden_tag()}}
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			  {{form.lot_number.label}}{{form.lot_number(class_="form-control")}}
+		  </div>
+		  <div class="col-md-5 mb-3">
+			{{form.potency.label}}{{form.potency(class_="form-control")}}
+		</div>
+
+		</div>
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+				{{form.HCP.label}}{{form.HCP(class_="form-control")}}
+			</div>
+			<div class="col-md-5 mb-3">
+			  {{form.chloro.label}}{{form.chloro(class_="form-control")}}
+		  </div>
+		  </div>
+
+		  <div class="form-row">
+			<div class="col-md-5 mb-3">
+				{{form.triton.label}}{{form.triton(class_="form-control")}}
+			</div>
+			<div class="col-md-5 mb-3">
+			  {{form.endo.label}}{{form.endo(class_="form-control")}}
+		  </div>
+		  </div>
+
+		  <div class="form-row">
+			<div class="col-md-5 mb-3">
+				{{form.analysis_date.label}}{{form.analysis_date(class_="form-control")}}
+			</div>
+			<div class="col-md-5 mb-3">
+			  {{form.report_date.label}}{{form.report_date(class_="form-control")}}
+		  </div>
+		  </div>
+
+		  <div class="form-row">
+			<div class="col-md-5 mb-3">
+				{{form.pH.label}}{{form.pH(class_="form-control")}}
+			</div>
+			<div class="col-md-5 mb-3">
+			  {{form.name.label}}{{form.name(class_="form-control")}}
+		  </div>
+		  </div>
+
+		  <div class="form-row">
+			<div class="col-md-5 mb-3">
+			  {{form.created_by.label}}{{form.created_by(class_="form-control", value=current_user.get_id(), readonly=True)}}
+		  </div>
+		  </div>
+		  {{form.submit(class_="btn btn-primary")}}
+	  </form>
+</div>
+
+  <div class="container">
+    <p align="center"><b>Copyright &copy; 2021-{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>  
+
+
+{% endblock %}

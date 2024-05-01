@@ -1,0 +1,108 @@
+{% extends "basic.html" %}
+{% block content %}
+<div class="container">
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>Verify The Lot</h3></div>
+	<div class="jumbotron">
+	<h3>You are Verifying Lot Number <b>{{lot.lot_number}}</b></h3>
+	
+	{% if error %}
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+	{{error}}
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	<span aria-hidden="true">&times;</span></button></div>
+	{% endif %}
+
+	<form method="POST" class="needs-validation" novalidate>
+		{{form.hidden_tag()}}
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+				<div class="p-3 mb-2  text-white" style="background-color:#368;">
+					{{form.idLot.label}}{{form.idLot(class_="form-control", value=lot.idLot, readonly=True)}}
+				</div>
+			</div>
+			<div class="col-md-5 mb-3">
+				<div class="p-3 mb-2  text-white" style="background-color:#368;">
+			  {{form.create_dt.label}}{{form.create_dt(class_="form-control", value=lot.create_dt, readonly=True)}}
+			</div>
+		  </div>
+		</div>
+	  <div class="form-row">
+		<div class="col-md-5 mb-3">
+			<div class="p-3 mb-2  text-white" style="background-color:#368;">
+			{{form.lot_number.label}}{{form.lot_number(class_="form-control", value=lot.lot_number, readonly=True)}}
+		</div></div>
+		<div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+		  {{form.potency.label}}{{form.potency(class_="form-control", value=lot.potency, readonly=True)}}
+	  </div></div>
+
+	  </div>
+	  <div class="form-row">
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			  {{form.HCP.label}}{{form.HCP(class_="form-control", value=lot.HCP, readonly=True)}}
+		  </div></div>
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			{{form.chloro.label}}{{form.chloro(class_="form-control", value=lot.Chloro, readonly=True)}}
+		</div></div>
+		</div>
+
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			  {{form.triton.label}}{{form.triton(class_="form-control", value=lot.Triton, readonly=True)}}
+		  </div></div>
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			{{form.endo.label}}{{form.endo(class_="form-control", value=lot.endo, readonly=True)}}
+		</div></div>
+		</div>
+
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			  {{form.analysis_date.label}}{{form.analysis_date(class_="form-control", value=lot.analysis_date, readonly=True)}}
+		  </div></div>
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			{{form.report_date.label}}{{form.report_date(class_="form-control", value=lot.report_date, readonly=True)}}
+		</div></div>
+		</div>
+
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			  {{form.pH.label}}{{form.pH(class_="form-control", value=lot.pH, readonly=True)}}
+		  </div></div>
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			{{form.name.label}}{{form.name(class_="form-control", value=lot.name, readonly=True)}}
+		</div></div>
+		</div>
+
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			{{form.created_by.label}}{{form.created_by(class_="form-control", value=userdict[lot.created_by], readonly=True)}}
+		</div></div>
+		</div>
+
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+				{{form.reviewed_by(class_="form-control", value=current_user.get_id(), hidden=True, readonly=True)}}
+			</div>
+		  </div>
+
+		{{form.submit_verify(class_="btn btn-primary")}}
+	</form>
+
+	</div>
+</div>
+
+<div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>
+</body>
+</html>
+{% endblock %}

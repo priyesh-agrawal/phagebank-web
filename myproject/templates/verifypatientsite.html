@@ -1,0 +1,43 @@
+{% extends "basic.html" %}
+{% block content %}
+
+
+  <!-- OTHER STUFF ON THE PAGE -->
+
+  <div class="container">
+	
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>Verify The Patient-Site</h3></div>
+    <div class="jumbotron">
+	
+	<p><table class="table table-striped">
+		<thead>
+			<tr>
+			  <th scope="col">Database ID</th>
+			  <th scope="col">Patient ID</th>
+			  <th scope="col">Site ID (Site Name)</th>
+			  <th scope="col">Create Date</th>
+			  <th scope="col">Click To Verify</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		{% for psite in patient_site %}
+		<tr><th scope="row">{{psite.idPatient_Site}}</th>
+		<td>{{patient_dict[psite.patient_id]}}</td>
+		<td>{{site_dict[psite.site_id]}}</td>
+		<td>{{psite.create_dt}}</td>
+		<td><a href="{{url_for('verifiedPatientSite', patientsiteid=psite.idPatient_Site)}}"><button type="button" class="btn btn-outline-dark">Verify</button></a></td></tr>
+		{% endfor %}
+</tbody>
+</table>
+	</p>
+	  </div>
+</div>
+  
+<div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>
+
+</body>
+</html>
+
+{% endblock %}

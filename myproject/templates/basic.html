@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PhageBank DB</title>
+    <!-- Latest compiled and minified CSS -->
+    <!-- Bootstrap CSS, JS, and jQuery -->
+	<link rel="shortcut icon" href="https://www.aphage.com/v3/wp-content/uploads/2021/07/cropped-apt_icon-32x32.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</head>
+
+  <body>
+	  <div class="container">
+  	<!-- DOCUMENTATION NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #358;">
+
+      <!-- TYPICALLY WE HAVE A BRAND LINK -->
+        <a class="navbar-brand" href="https://www.aphage.com" target="_blank"><img src="https://www.aphage.com/v3/wp-content/uploads/2021/07/cropped-apt_icon-180x180.png" width="60" height="60"></a>
+
+        <!-- THIS SETS UP THE COLLAPSABLE BUTTON ELEMENT (HAMBURGER) -->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+   <!-- THEN WE PUT AN UNORDERED LIST INSIDE OF A COLLAPSE DIV -->
+  <div class="collapse navbar-collapse" id="navbarText">
+
+
+    <ul class="navbar-nav justify-content-between w-100">
+
+
+
+
+       <!-- EVERY ITEM IN NAVBAR IS JUST A LIST ITEM -->
+	{% if current_user.is_authenticated %}
+  <li class="nav-item active"><a class="nav-link" href="{{url_for('index')}}">Home</a></li>
+	<div class="btn-group" >
+    <button type="button" class="btn btn-secondary  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #358;">
+      Patient Actions
+    </button>
+    <div class="dropdown-menu" style="background-color: #80aada;">
+      <a class="dropdown-item" href="{{url_for('createpatient')}}">Add New Patient</font></a></li>
+      <a class="dropdown-item" href="{{url_for('patienttolot')}}">Connect Patient-Lot</font></a></li>
+            <a class="dropdown-item" href="{{url_for('verifypatientlot')}}">Verify Patient-Lot</font></a></li>
+      <a class="dropdown-item" href="{{url_for('patienttotrial')}}">Connect Patient-Trial</font></a></li>
+      <a class="dropdown-item" href="{{url_for('verifypatienttrial')}}">Verify Patient-Trial</font></a></li>
+      <a class="dropdown-item" href="{{url_for('patienttosite')}}">Connect Patient-Site</font></a></li>
+      <a class="dropdown-item" href="{{url_for('verifypatientsite')}}">Verify Patient-Site</font></a></li>
+      <a class="dropdown-item" href="{{url_for('dosinginstruction')}}">Patient Dosing Instruction</font></a></li>
+      <a class="dropdown-item" href="{{url_for('verifypatientinstruction')}}">Verify Patient-Dosing Instruction</font></a></li>
+      <a class="dropdown-item" href="{{url_for('patientconnreport')}}">Patient Connections Report</font></a></li>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #358;">
+      Lot Action Items
+    </button>
+    <div class="dropdown-menu" style="background-color: #80aada;">
+      <a class="dropdown-item" href="{{url_for('addnewlot')}}">Add New Lot</font></a></li>
+      <a class="dropdown-item" href="{{url_for('verifylot')}}">Verify Lot</font></a></li>
+      <a class="dropdown-item" href="{{url_for('reportlot')}}">Get Lot Report</font></a></li>
+      <a class="dropdown-item" href="{{url_for('updatepotency')}}">Update Potency</font></a></li>
+      <a class="dropdown-item" href="{{url_for('boxtofreezerloc')}}">Look up Freezer Location</font></a></li>
+    </div>
+  </div><div class="btn-group">
+    <button type="button" class="btn btn-secondary  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #358;">
+      User Action items
+    </button>
+    <div class="dropdown-menu" style="background-color: #80aada;">
+      <a class="dropdown-item" href="{{url_for('addnewuser')}}">Add New User</font></a></li>
+      <a class="dropdown-item" href="{{url_for('usertosite')}}">Connect/Disconnect User To Site</font></a></li>
+      <a class="dropdown-item" href="{{url_for('usertotrial')}}">Connect/Disconnect User To Trial</font></a></li>
+      <a class="dropdown-item" href="{{url_for('changepassword')}}">Change User Password</font></a></li>
+      <a class="dropdown-item" href="{{url_for('flaguser')}}">Enable/Disable User</font></a></li>
+      <a class="dropdown-item" href="{{url_for('userconnreport')}}">User Connections Report</font></a></li>
+    </div>
+  </div>
+  <li class="nav-item active"><a class="nav-link" href="{{url_for('addnewsite')}}">Add New Site</a></li>
+  {% else %}
+	<li class="nav-item active"><a class="nav-link" href="{{url_for('index')}}">Home</a></li>
+	
+    
+	{% endif %} 
+    
+
+	{% if current_user.is_authenticated %}
+	<li class="nav-item  active"><a class="nav-link" href="{{url_for('logout')}}">Log Out</a></li>
+	{% else %}
+	<li class="nav-item active"><a class="nav-link" href="{{url_for('login')}}">Log In</a></li>
+	{% endif %}
+</ul>
+  </div>
+</nav>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{ message }}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span></button></div>
+
+{% endfor %}
+  {% endif %}
+{% endwith %}
+</div>
+
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
+

@@ -1,0 +1,194 @@
+{% extends "basic.html" %}
+{% block content %}
+  <!-- OTHER STUFF ON THE PAGE -->
+
+
+  <div class="container">
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>Adding New User for PhageBank DB</h3></div>
+
+	  <div class="jumbotron">
+		{% if form.fname.errors %}
+		{% for fname_err in form.fname.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{fname_err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.lname.errors %}
+		{% for err in form.lname.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		
+		{% if form.email_address.errors %}
+		{% for err in form.email_address.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+
+		{% if form.street1.errors %}
+		{% for err in form.street1.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.city.errors %}
+		{% for err in form.city.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.state.errors %}
+		{% for err in form.state.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.zip.errors %}
+		{% for err in form.zip.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.phone.errors %}
+		{% for err in form.phone.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.isLive.errors %}
+		{% for err in form.isLive.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.role_id.errors %}
+		{% for err in form.role_id.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+
+		{% if form.trial.errors %}
+		{% for err in form.trial.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+
+		{% if form.trial_confirm.errors %}
+		{% for err in form.trial_confirm.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+
+	  <form method="POST" class="needs-validation" novalidate>
+		  {{form.hidden_tag()}}
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			  {{form.fname.label}}{{form.fname(class_="form-control")}}
+		  </div>
+		  <div class="col-md-5 mb-3">
+			{{form.lname.label}}{{form.lname(class_="form-control")}}
+		</div>
+		</div>
+
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+			  {{form.email_address.label}}{{form.email_address(class_="form-control")}}
+		  </div>
+		<div class="col-md-5 mb-3">
+			{{form.street1.label}}{{form.street1(class_="form-control")}}
+		</div>
+		  </div>
+
+		  <div class="form-row">
+
+		<div class="col-md-5 mb-3">
+			{{form.street2.label}}{{form.street2(class_="form-control")}}
+		</div>
+		<div class="col-md-5 mb-3">
+			{{form.city.label}}{{form.city(class_="form-control")}}
+		</div>
+		  </div>
+
+		  <div class="form-row">
+
+		<div class="col-md-5 mb-3">
+			{{form.state.label}}{{form.state(class_="form-control")}}
+		</div>
+		<div class="col-md-5 mb-3">
+			{{form.zip.label}}{{form.zip(class_="form-control")}}
+		</div>
+		  </div>
+
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+			{{form.phone.label}}{{form.phone(class_="form-control")}}
+			</div>
+			<div class="col-md-5 mb-3">
+			{{form.isLive.label}}{{form.isLive(class_="form-control")}}
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+			{{form.role_id.label}}{{form.role_id(class_="form-control")}}
+			</div>
+			<div class="col-md-5 mb-3">
+				{{form.trial.label}}{{form.trial(class_="form-control")}}
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+			{{form.trial_confirm.label}}{{form.trial_confirm(class_="form-control")}}
+			</div>
+		</div>
+		  {{form.submit(class_="btn btn-primary")}}
+	  </form>
+	  
+	  </div>
+
+    
+
+  </div>
+
+  <div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>
+
+</body>
+
+	  </script>
+
+</html>
+
+
+{% endblock %}

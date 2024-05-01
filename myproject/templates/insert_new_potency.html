@@ -1,0 +1,60 @@
+{% extends "basic.html" %}
+{% block content %}
+<div class="container">
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>Update The Potency</h3></div>
+	<div class="jumbotron">
+	<h3>You are Updating Potency For Lot Number: <b>{{lot.lot_number}}</b></h3>
+	
+	{% if error %}
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+	{{error}}
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	<span aria-hidden="true">&times;</span></button></div>
+	{% endif %}
+	{% if form.potency.errors %}
+	{% for err in form.potency.errors %}
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+	  {{err}}
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>
+	{% endfor %}
+	{% endif %}
+
+	<form method="POST" class="needs-validation" novalidate>
+		{{form.hidden_tag()}}
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+				<div class="p-3 mb-2  text-white" style="background-color:#368;">
+					{{form.idLot.label}}{{form.idLot(class_="form-control", value=lot.idLot, readonly=True)}}
+				</div>
+			</div>
+			<div class="col-md-5 mb-3">
+				<div class="p-3 mb-2  text-white" style="background-color:#368;">
+					{{form.lot_number.label}}{{form.lot_number(class_="form-control", value=lot.lot_number, readonly=True)}}
+				</div>
+			</div>
+		</div>
+	  <div class="form-row">
+		<div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+		  {{form.name.label}}{{form.name(class_="form-control", value=lot.name, readonly=True)}}
+	  		</div>
+		</div>
+		  <div class="col-md-5 mb-3">
+			<div class="p-3 mb-2 text-white" style="background-color:#368;">
+			  {{form.potency.label}}{{form.potency(class_="form-control", value=lot.potency)}}
+		  </div>
+		</div>
+		</div>
+		{{form.submit_verify(class_="btn btn-primary")}}
+	</form>
+
+	</div>
+</div>
+
+<div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>
+</body>
+</html>
+{% endblock %}

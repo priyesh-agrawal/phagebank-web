@@ -1,0 +1,117 @@
+{% extends "basic.html" %}
+{% block content %}
+
+
+  <!-- OTHER STUFF ON THE PAGE -->
+
+  <div class="container">
+ 
+		<div class="p-3 mb-2 bg-secondary text-white"><h2>Get Dosing Instructions</h2></div>
+		<div class="jumbotron">
+		{% if err_msg %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			{{err_msg}}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>
+		{% endif %}
+				
+	  <form method="POST" class="needs-validation" novalidate>
+		  {{form.hidden_tag()}}
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			  {{form.patient_id.label}}{{form.patient_id(class_="form-control")}}
+		  </div>
+		</div>
+		 
+		  {{form.submit(class_="btn btn-primary")}}
+	  </form>
+{% if dosingdata|length != 0 %}
+	{% if dosingdata["user_id"]== ''%}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			No Dosing Data Avaliable!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>
+	{% endif %}
+	<br><br>
+	<a href="{{url_for('DownloadReport', filename=uniqid) }}"><button type="button" class="btn btn-outline-secondary">PDF Report</button></a>
+	<br>
+	<p><table class="table table-striped table-bordered table-hover" >
+		<thead ></thead>
+		<tbody>
+			<tr><th scope="col">Patient ID</th><td>{{dosingdata["patient_id"]}}</td><th scope="col">Trial ID</th><td>{{dosingdata["trial_descr"]}}</td></tr>
+			<tr><th scope="col">User ID</th><td>{{dosingdata["user_id"]}}</td><th scope="col">Trial Name</th><td><b>{{dosingdata["trial_name"]}}</b></td></tr>
+			<tr><th scope="col">Commit ID</th><td>{{dosingdata["commit_id"]}}</td><th scope="col">Report Date</th><td>{{year}}</td></tr>
+		</tbody>
+		</table>
+
+		<table class="table table-striped table-bordered table-hover">
+			<thead class="table-primary">
+				
+			<tr><th scope="col">Connection</th><th scope="col">Verification Status</th></tr>
+			</thead>
+			<tbody>
+			{% for ky in verificationstatus %}
+				{% if verificationstatus[ky]== 'Unverified'%}
+				<tr><td scope="col">{{ ky }}</td><td class="table-danger" scope="col">{{ verificationstatus[ky] }}</td></tr>
+				{% else %}
+				<tr><td scope="col">{{ ky }}</td><td class="table-success" scope="col">{{ verificationstatus[ky] }}</td></tr>
+				{% endif %}
+			{% endfor %}
+			</tbody>
+		</table>		
+
+
+	<table class="table table-striped table-bordered table-hover">
+		<thead class="table-primary">
+		
+		<tr><th scope="col">Lot Name</th><th scope="col">Lot Number</th><th scope="col">Chloro</th><th scope="col">pH</th><th scope="col">Endo</th><th scope="col">Potency</th><th scope="col">Detergent</th><th scope="col">HCP</th></tr>
+		</thead><tbody>{% for lot in dosingdata["Lots"] %}
+		<tr><td scope="col">{{ lot["name"] }} </td><td scope="col">{{ lot["lot_number"] }}</td><td scope="col">{{ lot["Chloro"] }}</td><td scope="col">{{ lot["pH"] }}</td><td scope="col">{{ lot["endo"] }}</td><td scope="col">{{ lot["potency"] }}</td><td scope="col">{{ lot["Triton"] }}</td><td scope="col">{{ lot["HCP"] }}</td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+
+	{% if "PJI" in dosingdata %}
+	
+	<table class="table table-striped table-bordered table-hover">
+		<thead class="table-primary">
+		
+
+		<tr><th scope="col" width="10%">Dosing Method</th><th scope="col">Phage</th><th scope="col">Placebo</th></tr>
+		</thead><tbody><tr><td scope="col"><b>IV Cycle 1</b></td><td scope="col">{% autoescape false %} {{ dosingdata["PJI"]["IV Cycle 1"]["Phage"] }} {% endautoescape %}</td><td scope="col">{% autoescape false %} {{ dosingdata["PJI"]["IV Cycle 1"]["Placebo"] }} {% endautoescape %}</td></tr>
+		<tr><td scope="col"><b>IO Cycle 1</b></td><td scope="col">{% autoescape false %} {{ dosingdata["PJI"]["IO Cycle 1"]["Phage"] }} {% endautoescape %}</td><td scope="col">{% autoescape false %} {{ dosingdata["PJI"]["IO Cycle 1"]["Placebo"] }} {% endautoescape %}</td></tr>
+		<tr><td scope="col"><b>IV Cycle 2</b> </td><td scope="col">{% autoescape false %} {{ dosingdata["PJI"]["IV Cycle 2"]["Phage"] }} {% endautoescape %}</td><td scope="col">{% autoescape false %} {{ dosingdata["PJI"]["IV Cycle 2"]["Placebo"] }} {% endautoescape %}</td></tr>
+		<tr><td scope="col"><b>IA Cycle 2</b></td><td scope="col">{% autoescape false %} {{ dosingdata["PJI"]["IA Cycle 2"]["Phage"] }} {% endautoescape %}</td><td scope="col">{% autoescape false %} {{ dosingdata["PJI"]["IA Cycle 2"]["Placebo"] }} {% endautoescape %}</td></tr>
+
+		</tbody>
+		</table>
+	{% endif %}
+	{% if "DFI" in dosingdata %}
+	<table class="table table-striped table-bordered table-hover">
+	<thead class="table-primary">
+	<tr><th scope="col">Dosing Method</th><th scope="col">Phage</th><th scope="col">Placebo</th></tr>
+	</thead><tbody>
+	<tr><td scope="col"><b>IV</b></td><td scope="col">{% autoescape false %} {{ dosingdata["DFI"]["IV"]["Phage"] }} {% endautoescape %}</td><td scope="col">{% autoescape false %} {{ dosingdata["DFI"]["IV"]["Placebo"] }} {% endautoescape %}</td></tr>
+	</tbody>
+	</table>
+
+	<table class="table table-striped table-bordered table-hover">
+	<thead class="table-primary">
+	
+	<tr><th scope="col">Dosing Method</th><th scope="col">Ulcer Area</th><th scope="col">Phage</th><th scope="col">Placebo</th></tr></thead><tbody>
+	{% for uarea in dosingdata["DFI"]["Topical"] %}
+	<tr><td scope="col"><b>Topical</b></td><td scope="col"><b>{{ uarea }}</b></td><td scope="col">{% autoescape false %} {{ dosingdata["DFI"]["Topical"][uarea]["Phage"] }} {% endautoescape %}</td><td scope="col">{% autoescape false %} {{ dosingdata["DFI"]["Topical"][uarea]["Placebo"] }} {% endautoescape %}</td></tr>
+	{% endfor %}
+
+	</tbody>
+	</table>
+	{% endif %}
+{% endif %}
+	</div>
+</div>
+
+<div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year.year}}, Adaptive Phage Therapeutics</b></p>
+</div>
+
+{% endblock %}
+

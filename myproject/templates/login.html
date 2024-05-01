@@ -1,0 +1,58 @@
+{% extends "basic.html" %}
+{% block content %}
+  <!-- OTHER STUFF ON THE PAGE -->
+
+  <div class="container">
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>Log In To Access The DataBase</h3></div>
+	  <div class="jumbotron">
+		{% if error %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			{{error}}<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span></button></div>
+		{% endif %}
+	  <form method="POST" class="needs-validation" novalidate>
+		  {{form.hidden_tag()}}
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			  {{form.username.label}}{{form.username(class_="form-control")}}
+			  {% if form.username.errors %}
+			  {% for user_err in form.username.errors %}
+			  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+				{{user_err}}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  <span aria-hidden="true">&times;</span></button></div>
+			  {% endfor %}
+			  {% endif %}
+		  </div>
+		</div>
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			{{form.password.label}}{{form.password(class_="form-control")}}
+			{% if form.password.errors %}
+			{% for pass_err in form.password.errors %}
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				{{pass_err}}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  <span aria-hidden="true">&times;</span></button></div>
+			  {% endfor %}
+			  {% endif %}
+		  </div>
+		</div>
+		{{form.submit(class_="btn btn-primary")}}
+	  </form>
+	  
+	  </div>
+
+    
+
+  </div>
+<div class="container">
+    <p align="center"><b>Copyright &copy; 2021-{{year}}, Adaptive Phage Therapeutics</b></p>
+</div>
+</body>
+
+
+</html>
+
+
+{% endblock %}

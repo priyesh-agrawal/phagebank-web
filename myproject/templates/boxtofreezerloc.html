@@ -1,0 +1,62 @@
+{% extends "basic.html" %}
+{% block content %}
+
+
+  <!-- OTHER STUFF ON THE PAGE -->
+
+<div class="container">
+
+		<div class="p-3 mb-2 bg-secondary text-white"><h2>Find Box Location</h2></div>
+		<div class="jumbotron">
+		{% if err_msg %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			{{err_msg}}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>
+		{% endif %}
+		{% if form.boxName.errors %}
+		{% for fname_err in form.boxName.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{fname_err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+
+		  <div class="form-row">
+			<div class="col-md-5 mb-3">
+	  <form method="POST" class="needs-validation" novalidate>
+		  {{form.hidden_tag()}}
+			  {{form.boxName.label}}{{form.boxName(class_="form-control")}}
+		  </div>
+		  </div>
+		  {{form.submit(class_="btn btn-primary")}}
+	  </form>
+
+
+{% if data %}
+		<p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Shelf</th>
+					<th scope="col">Rack</th>
+					<th scope="col">Drawer</th>
+				  <th scope="col">Box</th>
+				</tr></thead>			  
+			  <tbody>
+		<tr><td scope="row">{{data[0]}}</th>
+		<td>{{data[1]}}</td>
+		<td>{{data[2]}}</td>
+		<td>{{data[3]}}</td></tr>
+	</tbody>
+	</table>
+		</p>
+ {% endif %}
+  <div class="container">
+    <p align="center"><b>Copyright &copy; 2021-{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>  
+
+</div>
+{% endblock %}
+

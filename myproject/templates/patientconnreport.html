@@ -1,0 +1,131 @@
+{% extends "basic.html" %}
+{% block content %}
+
+
+  <!-- OTHER STUFF ON THE PAGE 
+	Patient.idPatient, Patient.patient_id, Trial.name, Trial.descr, Sites.Descr, Sites.site_id
+	-->
+
+  <div class="container">
+	
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>Patient Connection Report</h3></div>
+    <div class="jumbotron">
+		<p class="text-danger"><b>1. Patients missing Patient-Site and Patient-Trial Connections</b></p>
+		<p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+				  <th scope="col">Patient ID</th>
+				  <th scope="col">Trial Name</th>
+				  <th scope="col">Trial Description</th>
+				  <th scope="col">Site ID</th>
+				  <th scope="col">Site Description</th>
+				</tr>
+			  </thead>
+			  <tbody>
+			{% for report in no_connection_present %}
+			<tr><th scope="row">{{report.patient_id}}</th>
+			<td>{{report.name}}</td>
+			<td>{{report.descr}}</td>
+			<td>{{report.site_id}}</td>
+			<td>{{report.Descr}}</td></tr>
+			{% endfor %}
+	</tbody>
+	</table>
+		</p>
+	<p class="text-primary"><b>2. Patients with only Patient-Trial Connection (No Patient-Site Connection)</b></p>
+	<p><table class="table table-striped">
+		<thead>
+			<tr>
+			  <th scope="col">Patient ID</th>
+			  <th scope="col">Trial Name</th>
+			  <th scope="col">Trial Description</th>
+			  <th scope="col">Patient-Trial Verification</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		{% for report in onlytrial_connection_present %}
+		<tr><th scope="row">{{report.patient_id}}</th>
+		<td>{{report.name}}</td>
+		<td>{{report.descr}}</td>
+		{% if report.TrialReview %}
+		<td><font color="green">Verified</font></td>
+		{% else %}
+		<td><font color="orange">Not yet verified</font></td>
+		{% endif %}
+		</tr>
+		{% endfor %}
+</tbody>
+</table>
+	</p>
+	<p class="text-info"><b>3. Patients with only Patient-Site Connection (No Patient-Trial Connection)</b></p>
+	<p><table class="table table-striped">
+		<thead>
+			<tr>
+			  <th scope="col">Patient ID</th>
+			  <th scope="col">Site ID</th>
+			  <th scope="col">Site Description</th>
+			  <th scope="col">Patient-Site Verification</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		{% for report in onlysite_connection_present %}
+		<tr><th scope="row">{{report.patient_id}}</th>
+		<td>{{report.site_id}}</td>
+		<td>{{report.Descr}}</td>
+		{% if report.SiteReview %}
+		<td><font color="green">Verified</font></td>
+		{% else %}
+		<td><font color="orange">Not yet verified</font></td>
+		{% endif %}
+		</tr>
+		{% endfor %}
+</tbody>
+</table>
+	</p>
+	<p class="text-success"><b>4. Patients with both Patient-Trial and Patient-Site Connections</b></p>
+	<p><table class="table table-striped">
+		<thead>
+			<tr>
+			  <th scope="col">Patient ID</th>
+			  <th scope="col">Trial Name</th>
+			  <th scope="col">Trial Description</th>
+			  <th scope="col">Site ID</th>
+			  <th scope="col">Site Description</th>
+			  <th scope="col">Patient-Site Verification</th>
+			  <th scope="col">Patient-Trial Verification</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		{% for report in both_connection_present %}
+		<tr><th scope="row">{{report.patient_id}}</th>
+		<td>{{report.name}}</td>
+		<td>{{report.descr}}</td>
+		<td>{{report.site_id}}</td>
+		<td>{{report.Descr}}</td>
+		{% if report.SiteReview %}
+		<td><font color="green">Verified</font></td>
+		{% else %}
+		<td><font color="orange">Not yet verified</font></td>
+		{% endif %}
+		{% if report.TrialReview %}
+		<td><font color="green">Verified</font></td>
+		{% else %}
+		<td><font color="orange">Not yet verified</font></td>
+		{% endif %}
+		</tr>
+		{% endfor %}
+</tbody>
+</table>
+	</p>
+	  </div>
+</div>
+  
+<div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>
+
+</body>
+</html>
+
+{% endblock %}

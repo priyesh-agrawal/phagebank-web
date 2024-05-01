@@ -1,0 +1,40 @@
+{% extends "basic.html" %}
+{% block content %}
+
+
+  <!-- OTHER STUFF ON THE PAGE -->
+
+  <div class="container">
+	
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>Verify The Patient Dosing Instruction</h3></div>
+    <div class="jumbotron">
+	
+	<p><table class="table table-striped">
+		<thead>
+			<tr>
+			  <th scope="col">Database ID</th>
+			  <th scope="col">Patient ID</th>
+			  <th scope="col">Click To Verify</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			
+		{% for pdosin in all_patient_dosin %}
+		<tr><th scope="row">{{pdosin.idInstruction_Verification_Log}}</th>
+		<td>{{pdosin.patient_id}}</td>
+		<td><a href="{{url_for('verifieddosinginstruct', patientid=pdosin.idInstruction_Verification_Log)}}"><button type="button" class="btn btn-outline-dark">Verify</button></a></td></tr>
+		{% endfor %}
+</tbody>
+</table>
+	</p>
+	  </div>
+</div>
+  
+<div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>
+
+</body>
+</html>
+
+{% endblock %}

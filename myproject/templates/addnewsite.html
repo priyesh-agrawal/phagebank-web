@@ -1,0 +1,72 @@
+{% extends "basic.html" %}
+{% block content %}
+  <!-- OTHER STUFF ON THE PAGE -->
+
+
+  <div class="container">
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>Adding New Site to PhageBank DB</h3></div>
+
+	  <div class="jumbotron">
+		{% if form.Descr.errors %}
+		{% for err in form.Descr.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.site_id.errors %}
+		{% for err in form.site_id.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+		{% if form.conftrial.errors %}
+		{% for err in form.conftrial.errors %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  {{err}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span></button></div>
+		{% endfor %}
+		{% endif %}
+	  <form method="POST" class="needs-validation" novalidate>
+		  {{form.hidden_tag()}}
+		<div class="form-row">
+		  <div class="col-md-5 mb-3">
+			  {{form.Descr.label}}{{form.Descr(class_="form-control")}}
+		  </div>
+		  <div class="col-md-5 mb-3">
+			{{form.site_id.label}}{{form.site_id(class_="form-control")}}
+		</div>
+		</div>
+		<div class="form-row">
+			<div class="col-md-5 mb-3">
+				{{form.trial.label}}{{form.trial(class_="form-control")}}
+			</div>
+			<div class="col-md-5 mb-3">
+			  {{form.conftrial.label}}{{form.conftrial(class_="form-control")}}
+		  </div>
+		</div>
+		  {{form.submit(class_="btn btn-primary")}}
+	  </form>
+	  
+	  </div>
+
+    
+
+  </div>
+
+  <div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>
+
+</body>
+
+	  </script>
+
+</html>
+
+
+{% endblock %}

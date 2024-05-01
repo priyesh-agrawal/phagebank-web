@@ -1,0 +1,121 @@
+{% extends "basic.html" %}
+{% block content %}
+
+
+  <!-- OTHER STUFF ON THE PAGE 
+	Patient.idPatient, Patient.patient_id, Trial.name, Trial.descr, Sites.Descr, Sites.site_id
+	-->
+
+  <div class="container">
+	
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>User Connection Report</h3></div>
+    <div class="jumbotron">
+		<p class="text-danger"><b>1. Users with no User-Site and No User-Trial Connections</b></p>
+		<p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">FirstName</th>
+					<th scope="col">LastName</th>
+					<th scope="col">UserName</th>
+				  <th scope="col">Trial Name</th>
+				  <th scope="col">Trial Description</th>
+				  <th scope="col">Site ID</th>
+				  <th scope="col">Site Description</th>
+				</tr>
+			  </thead>
+			  <tbody>
+			{% for report in no_connection_present %}
+			<tr><th scope="row">{{report.fname}}</th>
+				<td>{{report.lname}}</td>
+				<td>{{report.username}}</td>
+			<td>{{report.name}}</td>
+			<td>{{report.descr}}</td>
+			<td>{{report.site_id}}</td>
+			<td>{{report.Descr}}</td></tr>
+			{% endfor %}
+	</tbody>
+	</table>
+		</p>
+
+	<p class="text-primary"><b>2. Users with only User-Trial Connection (No User-Site Connection)</b></p>
+	<p><table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">FirstName</th>
+				<th scope="col">LastName</th>
+				<th scope="col">UserName</th>
+			  <th scope="col">Trial Name</th>
+			  <th scope="col">Trial Description</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		{% for report in onlytrial_connection_present %}
+		<tr><th scope="row">{{report.fname}}</th>
+			<td>{{report.lname}}</td>
+			<td>{{report.username}}</td>
+		<td>{{report.name}}</td>
+		<td>{{report.descr}}</td>
+		{% endfor %}
+</tbody>
+</table>
+	</p>
+	<p class="text-info"><b>3. Users with only User-Site Connection (No User-Trial Connection)</b></p>
+	<p><table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">FirstName</th>
+				<th scope="col">LastName</th>
+				<th scope="col">UserName</th>
+			  <th scope="col">Site ID</th>
+			  <th scope="col">Site Description</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		{% for report in onlysite_connection_present %}
+		<tr><th scope="row">{{report.fname}}</th>
+			<td>{{report.lname}}</td>
+			<td>{{report.username}}</td>
+		<td>{{report.site_id}}</td>
+		<td>{{report.Descr}}</td></tr>
+		{% endfor %}
+</tbody>
+</table>
+	</p>
+	<p class="text-success"><b>4. Users with both User-Trial and User-Site Connections</b></p>
+	<p><table class="table table-striped">
+		<thead>
+			<tr>
+			  <th scope="col">FirstName</th>
+			  <th scope="col">LastName</th>
+			  <th scope="col">UserName</th>
+			  <th scope="col">Trial Name</th>
+			  <th scope="col">Trial Description</th>
+			  <th scope="col">Site ID</th>
+			  <th scope="col">Site Description</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		{% for report in both_connection_present %}
+		<tr><th scope="row">{{report.fname}}</th>
+		<td>{{report.lname}}</td>
+		<td>{{report.username}}</td>
+		<td>{{report.name}}</td>
+		<td>{{report.descr}}</td>
+		<td>{{report.site_id}}</td>
+		<td>{{report.Descr}}</td></tr>
+		{% endfor %}
+</tbody>
+</table>
+	</p>
+	  </div>
+</div>
+  
+<div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>
+
+</body>
+</html>
+
+{% endblock %}

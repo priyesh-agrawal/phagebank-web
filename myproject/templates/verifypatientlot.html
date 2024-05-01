@@ -1,0 +1,44 @@
+{% extends "basic.html" %}
+{% block content %}
+
+
+  <!-- OTHER STUFF ON THE PAGE -->
+
+  <div class="container">
+	
+	<div class="p-3 mb-2 bg-secondary text-white"><h3>Verify The Patient-Lot</h3></div>
+    <div class="jumbotron">
+	
+	<p><table class="table table-striped">
+		<thead>
+			<tr>
+			  <th scope="col">Database Id</th>
+			  <th scope="col">Patient Id</th>
+			  <th scope="col">Lot Number (Lot Name)</th>
+			  <th scope="col">Create Date</th>
+			  <th scope="col">Click To Verify</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			
+		{% for plot in patient_lot %}
+		<tr><th scope="row">{{plot.idPatient_Lot}}</th>
+		<td>{{patient_dict[plot.patient_id]}}</td>
+		<td>{{lot_dict[plot.lot_id]}}</td>
+		<td>{{plot.create_dt}}</td>
+		<td><a href="{{url_for('verifiedPatientLot', patientlotid=plot.idPatient_Lot)}}"><button type="button" class="btn btn-outline-dark">Verify</button></a></td></tr>
+		{% endfor %}
+</tbody>
+</table>
+	</p>
+	  </div>
+</div>
+  
+<div class="container">
+    <p align="center"><b>Copyright &copy; 2021,{{year}}, Adaptive Phage Therapeutics</b></p>
+  </div>
+
+</body>
+</html>
+
+{% endblock %}
